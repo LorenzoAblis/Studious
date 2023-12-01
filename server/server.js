@@ -4,7 +4,7 @@ import authRoute from "./routes/auth.js";
 
 const app = express();
 
-// TODO: Middleware
+app.use(express.json());
 
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
