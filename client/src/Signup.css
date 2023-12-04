@@ -1,0 +1,27 @@
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.aero-title {
+  text-align: center;
+  background: -webkit-linear-gradient(#6bdfdb, #2278fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-container {
+  margin: auto;
+  width: 35%;
+}
