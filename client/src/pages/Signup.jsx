@@ -1,8 +1,54 @@
-import { Form, Button } from "react-bootstrap";
+import { useState } from "react";
+
 import "../css/global.css";
 import "../css/Signup.css";
+import { Form, Button, InputGroup } from "react-bootstrap";
 
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfimPassword] = useState(true);
+  const [passwordToggleProperties, setPasswordToggleProperties] = useState({
+    icon: "bi bi-eye-fill",
+    inputType: "password",
+  });
+  const [confirmPasswordToggleProperties, setConfirmPasswordToggleProperties] =
+    useState({
+      icon: "bi bi-eye-fill",
+      inputType: "password",
+    });
+
+  const handleToggle = (type) => {
+    if (type != "confirm") {
+      setShowPassword(!showPassword);
+
+      if (showPassword) {
+        setPasswordToggleProperties({
+          icon: "bi bi-eye-slash-fill",
+          inputType: "text",
+        });
+      } else {
+        setPasswordToggleProperties({
+          icon: "bi bi-eye-fill",
+          inputType: "password",
+        });
+      }
+    } else {
+      setShowConfimPassword(!showConfirmPassword);
+
+      if (showConfirmPassword) {
+        setConfirmPasswordToggleProperties({
+          icon: "bi bi-eye-slash-fill",
+          inputType: "text",
+        });
+      } else {
+        setConfirmPasswordToggleProperties({
+          icon: "bi bi-eye-fill",
+          inputType: "password",
+        });
+      }
+    }
+  };
+
   return (
     <>
       <div className="form-container mt-5 m-auto">
@@ -15,21 +61,26 @@ const Signup = () => {
           <Form.Group className="mb-3">
             <Form.Control type="text" placeholder="Email" name="email" />
           </Form.Group>
-          {/* TODO: Add show password eye thing */}
-          <Form.Group className="mb-3">
+          <InputGroup className="mb-3">
             <Form.Control
-              type="password"
+              type={passwordToggleProperties.inputType}
               placeholder="Password"
               name="password"
             />
-          </Form.Group>
-          <Form.Group className="mb-3">
+            <Button variant="light" onClick={() => handleToggle("creation")}>
+              <i className={passwordToggleProperties.icon}></i>
+            </Button>
+          </InputGroup>
+          <InputGroup className="mb-3">
             <Form.Control
-              type="password"
+              type={confirmPasswordToggleProperties.inputType}
               placeholder="Confirm password"
               name="confirmPassword"
             />
-          </Form.Group>
+            <Button variant="light" onClick={() => handleToggle("confirm")}>
+              <i className={confirmPasswordToggleProperties.icon}></i>
+            </Button>
+          </InputGroup>
         </Form>
         <Button variant="primary" className="w-100">
           Register
