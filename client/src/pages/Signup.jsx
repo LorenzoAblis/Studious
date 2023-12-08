@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 import "../css/Signup.css";
 import Form from "react-bootstrap/Form";
@@ -17,6 +19,12 @@ const Signup = () => {
       icon: "bi bi-eye-fill",
       inputType: "password",
     });
+
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const handleToggle = (type) => {
     if (type != "confirm") {
@@ -50,23 +58,60 @@ const Signup = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const username = userData.username;
+    const email = userData.email;
+    const password = userData.password;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
+
+  const handleChange = (e) => {
+    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <>
       <div className="form-container mt-5 m-auto">
         <h1 className="mb-4 aero-title">Aero</h1>
         <h2 className="mb-3">Signup for an account</h2>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Control type="text" placeholder="Username" name="username" />
+            <Form.Control
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Control type="text" placeholder="Email" name="email" />
+            <Form.Control
+              type="text"
+              placeholder="Email Address"
+              name="email"
+              onChange={handleChange}
+            />
           </Form.Group>
           <InputGroup className="mb-3">
             <Form.Control
               type={passwordToggleProperties.inputType}
               placeholder="Password"
               name="password"
+              onChange={handleChange}
             />
             <Button variant="light" onClick={() => handleToggle("creation")}>
               <i className={passwordToggleProperties.icon}></i>
@@ -82,7 +127,7 @@ const Signup = () => {
               <i className={confirmPasswordToggleProperties.icon}></i>
             </Button>
           </InputGroup>
-          <Button variant="primary" className="w-100">
+          <Button variant="primary" className="w-100" type="submit">
             Register
           </Button>
         </Form>

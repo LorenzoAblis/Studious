@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import "../css/Login.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -52,7 +51,11 @@ const Login = () => {
                 <i className={passwordToggleProperties.icon}></i>
               </Button>
             </InputGroup>
-            <a href="/users/login" className="forgot-password mb-3">
+            <a
+              href="/users/forgot-password"
+              className="forgot-password mb-3"
+              style={{ float: "right" }}
+            >
               Forgot password?
             </a>
           </div>
