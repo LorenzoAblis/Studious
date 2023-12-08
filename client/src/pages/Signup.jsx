@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 
 import "../css/Signup.css";
@@ -10,6 +10,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfimPassword] = useState(true);
+  const [validated, setValidated] = useState(false);
   const [passwordToggleProperties, setPasswordToggleProperties] = useState({
     icon: "bi bi-eye-fill",
     inputType: "password",
@@ -24,6 +25,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleToggle = (type) => {
@@ -65,18 +67,34 @@ const Signup = () => {
     const email = userData.email;
     const password = userData.password;
 
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed up
         const user = userCredential.user;
 
+        updateProfile(user, {
+          displayName: username,
+        })
+          .then(() => {
+            // TODO: Implemenmt form feedback and error toasts
+          })
+          .catch((error) => {
+            //
+            //
+          });
         console.log(user);
-        // ...
+        window.location.href = "/users/login";
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        //
       });
   };
 
@@ -89,25 +107,34 @@ const Signup = () => {
       <div className="form-container mt-5 m-auto">
         <h1 className="mb-4 aero-title">Aero</h1>
         <h2 className="mb-3">Signup for an account</h2>
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Control
+              required
               type="text"
               placeholder="Username"
               name="username"
               onChange={handleChange}
             />
+            <Form.Control.Feedback type="invalid">
+              Please choose a username.
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Control
+              required
               type="text"
               placeholder="Email Address"
               name="email"
               onChange={handleChange}
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter a valid email address.
+            </Form.Control.Feedback>
           </Form.Group>
           <InputGroup className="mb-3">
             <Form.Control
+              required
               type={passwordToggleProperties.inputType}
               placeholder="Password"
               name="password"
@@ -116,16 +143,25 @@ const Signup = () => {
             <Button variant="light" onClick={() => handleToggle("creation")}>
               <i className={passwordToggleProperties.icon}></i>
             </Button>
+            <Form.Control.Feedback type="invalid">
+              Please type in a valid password.
+            </Form.Control.Feedback>
           </InputGroup>
           <InputGroup className="mb-3">
             <Form.Control
+              required
               type={confirmPasswordToggleProperties.inputType}
               placeholder="Confirm password"
               name="confirmPassword"
+              onChange={handleChange}
+              isInvalid={userData.password != userData.confirmPassword}
             />
             <Button variant="light" onClick={() => handleToggle("confirm")}>
               <i className={confirmPasswordToggleProperties.icon}></i>
             </Button>
+            <Form.Control.Feedback type="invalid">
+              Passwords do not match.
+            </Form.Control.Feedback>
           </InputGroup>
           <Button variant="primary" className="w-100" type="submit">
             Register
