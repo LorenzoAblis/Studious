@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import logo from "../assets/Studious.png";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -30,7 +31,7 @@ const Login = () => {
   return (
     <>
       <div className="form-container mt-5 m-auto">
-        <h1 className="mb-4 aero-title">Aero</h1>
+        <img src={logo} alt="image" className="mb-4 logo" />
         <h2 className="mb-3">Login</h2>
         <Form>
           <Form.Group className="mb-3">

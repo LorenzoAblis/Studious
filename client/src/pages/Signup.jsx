@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 
+import logo from "../assets/Studious.png";
 import "../css/Signup.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -105,7 +106,7 @@ const Signup = () => {
   return (
     <>
       <div className="form-container mt-5 m-auto">
-        <h1 className="mb-4 aero-title">Aero</h1>
+        <img src={logo} alt="logo" className="mb-4 logo" />
         <h2 className="mb-3">Signup for an account</h2>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3">

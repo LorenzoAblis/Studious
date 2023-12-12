@@ -5,7 +5,7 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="form-container mt-5 m-auto">
-        <h1 className="mb-4 aero-title">Aero</h1>
+        <h1 className="mb-4 aero-title">Studious</h1>
         <h2 className="mb-3">Forgot your password?</h2>
         <Form>
           <Form.Group className="mb-3">

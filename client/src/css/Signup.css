@@ -5,11 +5,11 @@ a:link,
   text-decoration: none;
 }
 
-.aero-title {
-  text-align: center;
-  background: -webkit-linear-gradient(#6bdfdb, #2278fb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .form-container {
