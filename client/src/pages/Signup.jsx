@@ -95,7 +95,7 @@ const Signup = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        //
+        console.log(errorCode, errorMessage);
       });
   };
 
@@ -140,12 +140,13 @@ const Signup = () => {
               placeholder="Password"
               name="password"
               onChange={handleChange}
+              isInvalid={userData.password.length < 6}
             />
             <Button variant="light" onClick={() => handleToggle("creation")}>
               <i className={passwordToggleProperties.icon}></i>
             </Button>
             <Form.Control.Feedback type="invalid">
-              Please type in a valid password.
+              Password must be at longer than 6 characters.
             </Form.Control.Feedback>
           </InputGroup>
           <InputGroup className="mb-3">
