@@ -8,9 +8,9 @@ import App from "./App";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <AuthContextProvider>
+  <AuthContextProvider>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  // </AuthContextProvider>
+  </AuthContextProvider>
 );

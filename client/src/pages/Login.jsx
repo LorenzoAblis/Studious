@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { auth } from "../../firebaseConfig";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { AuthContext } from "../context/AuthContext.jsx";
 
 import logo from "../assets/Studious.png";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(true);
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
   const [passwordToggleProperties, setPasswordToggleProperties] = useState({
     icon: "bi bi-eye-fill",
     inputType: "password",
@@ -28,8 +39,39 @@ const Login = () => {
     }
   };
 
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, userData.email, userData.password)
+      .then((userCredential) => {
+        navigate("/");
+        setCurrentUser(userCredential.user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setCurrentUser({});
+        console.log(currentUser.email);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleChange = (e) => {
+    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <>
+      <button onClick={handleSignOut}>signout</button>
+      <p>
+        current user: {currentUser ? currentUser.email : "No user logged in"}
+      </p>
       <div className="form-container mt-5 m-auto">
         <img src={logo} alt="image" className="mb-4 logo" />
         <h2 className="mb-3">Login</h2>
@@ -37,8 +79,9 @@ const Login = () => {
           <Form.Group className="mb-3">
             <Form.Control
               type="text"
-              placeholder="Email / Username"
-              name="name"
+              placeholder="Email"
+              name="email"
+              onChange={handleChange}
             />
           </Form.Group>
           <div className="mb-3">
@@ -47,6 +90,7 @@ const Login = () => {
                 type={passwordToggleProperties.inputType}
                 placeholder="Password"
                 name="password"
+                onChange={handleChange}
               />
               <Button variant="light" onClick={handleToggle}>
                 <i className={passwordToggleProperties.icon}></i>
@@ -61,7 +105,7 @@ const Login = () => {
             </a>
           </div>
 
-          <Button variant="primary" className="w-100">
+          <Button variant="primary" className="w-100" onClick={handleLogin}>
             Login
           </Button>
         </Form>

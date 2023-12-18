@@ -1,23 +1,39 @@
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
-import ForgotPassword from "./pages/ForgotPassword.jsx";
+
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext.jsx";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import Home from "./pages/Home.jsx";
 
 function App() {
-//   const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
+
+  // eslint-disable-next-line react/prop-types
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/users/login" />;
+    }
+    return children;
+  };
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/users/signup" element={<Signup />}></Route>
-          <Route path="/users/login" element={<Login />}></Route>
-          <Route
-            path="/users/forgot-password"
-            element={<ForgotPassword />}
-          ></Route>
+          <Route path="/">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="users/login" element={<Login />} />
+            <Route path="users/signup" element={<Signup />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
