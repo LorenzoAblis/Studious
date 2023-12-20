@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { auth, db } from "../../firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
+import { getDatabase, ref, set } from "firebase/database";
 
 import logo from "../assets/Studious.png";
 import "../css/Signup.css";
@@ -61,7 +63,7 @@ const Signup = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const username = userData.username;
@@ -76,20 +78,28 @@ const Signup = () => {
     setValidated(true);
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
+        console.log("asdasd");
         const user = userCredential.user;
 
-        updateProfile(user, {
+        await updateProfile(user, {
           displayName: username,
         })
-          .then(() => {
+          .then(async () => {
             // TODO: Implemenmt form feedback and error toasts
+            // const docRef = await addDoc(collection(db, "users"), {
+            //   name: user.displayName,
+            //   email: user.email,
+            // });
+            set(ref(db, "users/" + "asd"), {
+              username: user.displayName,
+            });
           })
           .catch((error) => {
             //
             //
           });
-        console.log(user);
+
         window.location.href = "/users/login";
       })
       .catch((error) => {
