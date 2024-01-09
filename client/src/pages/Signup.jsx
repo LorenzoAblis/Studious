@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
-import { getDatabase, ref, set } from "firebase/database";
+import { ref, set } from "firebase/database";
 
 import logo from "../assets/Studious.png";
 import "../css/Signup.css";
@@ -77,36 +77,26 @@ const Signup = () => {
     }
     setValidated(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        console.log("asdasd");
-        const user = userCredential.user;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
-        await updateProfile(user, {
-          displayName: username,
-        })
-          .then(async () => {
-            // TODO: Implemenmt form feedback and error toasts
-            // const docRef = await addDoc(collection(db, "users"), {
-            //   name: user.displayName,
-            //   email: user.email,
-            // });
-            set(ref(db, "users/" + "asd"), {
-              username: user.displayName,
-            });
-          })
-          .catch((error) => {
-            //
-            //
-          });
-
-        window.location.href = "/users/login";
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+      await updateProfile(user, {
+        displayName: username,
       });
+
+      await set(ref(db, "users/" + username), {
+        email: email,
+      });
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode, errorMessage);
+    }
   };
 
   const handleChange = (e) => {
