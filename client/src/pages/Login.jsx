@@ -2,17 +2,19 @@ import { useState, useContext } from "react";
 import { auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import logo from "../assets/Studious.png";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const [showInvaildCredAlert, setShowInvaildCredAlert] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [userData, setUserData] = useState({
     email: "",
@@ -43,21 +45,21 @@ const Login = () => {
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         navigate("/");
-        console.log(userCredential.user)
+        console.log(userCredential.user);
         setCurrentUser(userCredential.user);
-        
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        if (error.code != "") {
+          toast.error("Incorrect email or password. Please try again");
+        }
       });
   };
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        setCurrentUser({});
         console.log(currentUser.email);
+        toast.success("Successfully signed out");
       })
       .catch((error) => {
         console.error(error);

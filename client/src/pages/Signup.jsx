@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 
 import logo from "../assets/Studious.png";
@@ -9,8 +9,11 @@ import "../css/Signup.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
+import toast from "react-hot-toast";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfimPassword] = useState(true);
   const [validated, setValidated] = useState(false);
@@ -85,6 +88,8 @@ const Signup = () => {
       );
       const user = userCredential.user;
 
+      toast.success("Successfully created account");
+
       await updateProfile(user, {
         displayName: username,
       });
@@ -92,10 +97,13 @@ const Signup = () => {
       await set(ref(db, "users/" + username), {
         email: email,
       });
+
+      navigate("/");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
+
+      setShowInvaildCredAlert(true);
     }
   };
 
