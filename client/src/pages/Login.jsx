@@ -46,7 +46,6 @@ const Login = () => {
       .then((userCredential) => {
         navigate("/");
         console.log(userCredential.user);
-        setCurrentUser(userCredential.user);
       })
       .catch((error) => {
         if (error.code != "") {
