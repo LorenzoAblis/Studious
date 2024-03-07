@@ -1,0 +1,44 @@
+@import "./global.scss";
+
+.sidebar {
+  height: 100%;
+  width: 18vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: $background;
+  overflow-x: hidden;
+  padding-top: 4vh;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 15vw;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 400;
+        color: $primary;
+        transition: all 0.5s;
+
+        &:hover {
+          text-shadow: 0 0 1rem $accent;
+        }
+      }
+    }
+  }
+}

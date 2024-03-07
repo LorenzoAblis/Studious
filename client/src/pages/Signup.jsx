@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 
 import logo from "../assets/Studious.png";
-import "../css/Signup.css";
+import "../styles/Signup.scss";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
