@@ -9,8 +9,10 @@ const Home = () => {
 
   return (
     <>
-      <Sidebar />
-      <main>asdasdasd</main>
+      <div className="d-flex flex-row">
+        <Sidebar />
+        <main>asdasds</main>
+      </div>
     </>
   );
 };
