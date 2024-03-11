@@ -1,0 +1,57 @@
+@import "./global.scss";
+
+.assignments {
+  padding: 3rem;
+
+  h1 {
+    color: $primary;
+  }
+
+  .assignment-cards {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    .assignment-card {
+      padding: 1.5rem;
+      border-radius: 2rem;
+      width: 40vw;
+      color: white;
+      background-color: $background;
+      box-shadow: 0 0 1rem $primary;
+
+      h2 {
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      h3 {
+        font-size: 1rem;
+        color: $text-secondary;
+      }
+
+      p {
+        font-size: 1.25rem;
+      }
+
+      .assignment-card-button-group {
+        button {
+          color: $primary;
+          font-size: 2rem;
+          background-color: transparent;
+          border: none;
+          border-radius: 4rem;
+          transition: all 0.5s;
+          width: 5vw;
+          outline: $primary 1px solid;
+
+          &:hover {
+            color: $text;
+            background-color: $primary;
+            box-shadow: 0 0 1rem $primary, 0 0 1rem $primary inset;
+          }
+        }
+      }
+    }
+  }
+}

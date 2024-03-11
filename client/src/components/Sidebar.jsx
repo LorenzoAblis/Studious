@@ -3,7 +3,7 @@ import "../styles/Sidebar.scss";
 
 const Sidebar = () => {
   return (
-    <nav className="sidebar">
+    <nav className="sidebar d-flex">
       <ul>
         <li>
           <img src={studious} alt="" />

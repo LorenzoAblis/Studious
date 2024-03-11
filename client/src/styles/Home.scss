@@ -1,6 +1,6 @@
 @import "../styles/global.scss";
 
-// main {
-//   // background-color: $background;
-//   z-index: 0;
-// }
+main {
+  display: flex;
+  background-color: $secondary;
+}
