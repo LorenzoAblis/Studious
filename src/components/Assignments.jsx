@@ -15,6 +15,9 @@ const Assignments = () => {
             <button>
               <i className="bi bi-check-lg"></i>
             </button>
+            <button>
+              <i className="bi bi-three-dots"></i>
+            </button>
           </div>
         </article>
       </div>
