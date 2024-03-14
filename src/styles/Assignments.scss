@@ -37,6 +37,7 @@
       .assignment-card-button-group {
         display: flex;
         gap: 1rem;
+        position: relative;
 
         button {
           color: $primary;
@@ -53,6 +54,15 @@
             background-color: $primary;
             box-shadow: 0 0 1rem $primary, 0 0 1rem $primary inset;
           }
+        }
+
+        .dropdown {
+          background-color: $background;
+          box-shadow: 0 0 0.25rem $primary;
+          padding: 1rem;
+          border-radius: 1rem;
+          position: absolute;
+          top: calc(100% + 0.5rem);
         }
       }
     }
