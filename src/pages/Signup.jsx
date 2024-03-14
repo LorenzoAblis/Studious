@@ -4,7 +4,7 @@ import { auth, db } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 
-import logo from "../assets/Studious.png";
+import logo from "../assets/studious.png";
 import "../styles/Signup.scss";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";

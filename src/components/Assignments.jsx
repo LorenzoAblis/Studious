@@ -31,7 +31,20 @@ const AssignmentCard = ({
           </button>
           {showDropdown && (
             <div className="dropdown">
-              <p>Dropdown content for {title}</p>
+              <div className="dropdown-button-group">
+                <button>
+                  <i className="bi bi-eye-fill"></i>Details
+                </button>
+                <button>
+                  <i className="bi bi-pencil-square"></i>Edit
+                </button>
+                <button>
+                  <i className="bi bi-check-lg"></i>Complete
+                </button>
+              </div>
+              <button className="delete">
+                <i className="bi bi-trash-fill"></i>
+              </button>
             </div>
           )}
         </div>
@@ -60,9 +73,14 @@ const Assignments = () => {
       className: "APrecalculus",
       dueDate: "Thursday, March 1",
     },
+    {
+      title: "Day 13 CW",
+      className: "APrecalculus",
+      dueDate: "Thursday, March 1",
+    },
   ];
   const [dropdownStates, setDropdownStates] = useState(
-    Array(assignmentsData.length).fill(false)
+    Array(assignmentsData.length).fill(false),
   );
 
   const toggleDropdown = (index) => {

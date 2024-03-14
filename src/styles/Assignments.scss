@@ -10,12 +10,14 @@
   .assignment-cards {
     margin-top: 2rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
 
     .assignment-card {
       padding: 1.5rem;
       border-radius: 2rem;
-      width: 40vw;
+      width: 35vw;
       color: white;
       background-color: $background;
       box-shadow: 0 0 1rem $primary;
@@ -63,6 +65,38 @@
           border-radius: 1rem;
           position: absolute;
           top: calc(100% + 0.5rem);
+
+          .delete {
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+
+            &:hover {
+              background-color: red;
+              box-shadow: 0 0 1rem red, 0 0 1rem red inset;
+            }
+          }
+
+          .dropdown-button-group {
+            display: flex;
+            gap: 1rem;
+            width: 20vw;
+            margin-bottom: 1rem;
+
+            button {
+              width: 33%;
+              font-size: 1rem;
+              border-radius: 0.5rem;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding: 0.5rem;
+            }
+
+            // TODO: Make edit and complete buttons different color backgrounds on hover
+            
+          }
         }
       }
     }

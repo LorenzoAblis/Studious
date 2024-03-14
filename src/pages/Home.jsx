@@ -10,8 +10,8 @@ const Home = () => {
 
   return (
     <>
+      <Sidebar />
       <main>
-        <Sidebar />
         <Assignments />
       </main>
     </>

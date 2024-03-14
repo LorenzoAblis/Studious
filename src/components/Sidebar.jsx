@@ -9,16 +9,16 @@ const Sidebar = () => {
           <img src={studious} alt="" />
         </li>
         <li>
-          <a href="">Assignments</a>
+          <a href=""><i className="bi bi-motherboard-fill"></i>Dashboard</a>
         </li>
         <li>
-          <a href="">Contact</a>
+          <a href=""><i className="bi bi-list-task"></i>Assignments</a>
         </li>
         <li>
-          <a href="">Schedule</a>
+          <a href=""><i className="bi bi-calendar-fill"></i>Schedule</a>
         </li>
         <li>
-          <a href="">Services</a>
+          <a href=""><i className="bi bi-gear-fill"></i>Settings</a>
         </li>
       </ul>
     </nav>
