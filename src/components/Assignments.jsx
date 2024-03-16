@@ -22,7 +22,7 @@ const AssignmentCard = ({
       <h3>Due Date</h3>
       <p>{dueDate}</p>
       <div className="assignment-card-button-group">
-        <button>
+        <button className="complete">
           <i className="bi bi-check-lg"></i>
         </button>
         <div>
@@ -38,7 +38,7 @@ const AssignmentCard = ({
                 <button>
                   <i className="bi bi-pencil-square"></i>Edit
                 </button>
-                <button>
+                <button className="complete">
                   <i className="bi bi-check-lg"></i>Complete
                 </button>
               </div>
@@ -80,7 +80,7 @@ const Assignments = () => {
     },
   ];
   const [dropdownStates, setDropdownStates] = useState(
-    Array(assignmentsData.length).fill(false),
+    Array(assignmentsData.length).fill(false)
   );
 
   const toggleDropdown = (index) => {

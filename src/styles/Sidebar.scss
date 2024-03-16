@@ -19,6 +19,14 @@
       font-weight: 200;
       width: 100%;
 
+      img {
+        margin: auto;
+        display: block;
+        width: 15vw;
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
+
       a {
         color: $primary;
         display: block;
@@ -38,11 +46,5 @@
         }
       }
     }
-  }
-
-  img {
-    width: 15vw;
-    object-fit: cover;
-    margin-bottom: 1rem;
   }
 }
