@@ -2,7 +2,7 @@
 
 .sidebar {
   position: fixed;
-  background-color: $background;
+  background-color: $secondary;
   height: 100vh;
   padding: 1rem;
   box-shadow: 0 0 1rem $background;
@@ -15,14 +15,14 @@
     gap: 0.5rem;
 
     li {
-      font-size: 1.75vw;
+      font-size: 2.5vw;
       font-weight: 200;
       width: 100%;
 
       img {
         margin: auto;
         display: block;
-        width: 15vw;
+        width: 22vw;
         object-fit: cover;
         margin-bottom: 1rem;
       }

@@ -17,7 +17,7 @@
     .assignment-card {
       padding: 1.5rem;
       border-radius: 2rem;
-      width: 35vw;
+      width: 67vw;
       color: white;
       background-color: $background;
       box-shadow: 0 0 1rem $primary;
@@ -55,12 +55,22 @@
           transition: all 0.5s;
           width: 5vw;
           outline: $primary 1px solid;
+          display: flex;
+          justify-content: center;
 
           &:hover {
             color: $text;
             background-color: $primary;
             box-shadow: 0 0 1rem $primary, 0 0 1rem $primary inset;
           }
+        }
+
+        .show {
+          display: inline;
+        }
+
+        .hide {
+          display: none;
         }
 
         .dropdown {
