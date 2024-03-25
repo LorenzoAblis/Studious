@@ -1,0 +1,30 @@
+a:link,
+:hover,
+:visited,
+:active {
+  text-decoration: none;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.form-container {
+  width: 35%;
+}
+
+.or-line {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #5c5c5c;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.or-line span {
+  background: #fff;
+  padding: 0 5px;
+}

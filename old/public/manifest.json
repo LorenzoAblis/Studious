@@ -1,0 +1,9 @@
+{
+  "short_name": "Studious",
+  "name": "Studious",
+  "description": "Student trackr",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b2333",
+  "theme_color": "#0b2333"
+}
