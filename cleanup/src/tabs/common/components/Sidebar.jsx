@@ -1,4 +1,4 @@
-import studious from "../assets/studious.png";
+import studious from "../../../assets/studious.png";
 import "../styles/Sidebar.scss";
 
 const Sidebar = () => {

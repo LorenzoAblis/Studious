@@ -1,11 +1,11 @@
-import Signup from "./pages/Signup.jsx";
-import Login from "./pages/Login.jsx";
+import Signup from "./pages/components/Signup.jsx";
+import Login from "./pages/components/Login.jsx";
 
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Home from "./pages/Home.jsx";
+import Home from "./pages/components/Home.jsx";
 
 function App() {
   const { currentUser } = useContext(AuthContext);

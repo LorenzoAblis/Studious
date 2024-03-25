@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import { createContext, useEffect, useState } from "react";
@@ -12,8 +13,6 @@ export const AuthContextProvider = ({ children }) => {
       setCurrentUser(user);
     });
 
-    console.log("asdasdasd");
-
     return () => {
       unsub();
     };
@@ -24,4 +23,8 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../../firebaseConfig";
+import { auth, db } from "../../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { ref, set } from "firebase/database";
 
-import logo from "../assets/studious.png";
+import logo from "../../assets/studious.png";
 import "../styles/Signup.scss";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";

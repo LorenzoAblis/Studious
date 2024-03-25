@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../../../firebaseConfig.js";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { AuthContext } from "../context/AuthContext.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import logo from "../assets/studious.png";
+import logo from "../../assets/studious.png";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";

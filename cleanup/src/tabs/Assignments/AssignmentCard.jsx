@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import "../styles/Assignments.scss";
+import "./Assignments.scss";
 
 const AssignmentCard = ({
   title,
