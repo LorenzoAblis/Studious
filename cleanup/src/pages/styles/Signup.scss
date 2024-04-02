@@ -1,30 +1,93 @@
-a:link,
-:hover,
-:visited,
-:active {
-  text-decoration: none;
-}
+@import "../../global.scss";
 
-.logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.form-container {
-  width: 35%;
-}
+  button {
+    border: none;
+  }
 
-.or-line {
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid #5c5c5c;
-  line-height: 0.1em;
-  margin: 10px 0 20px;
-}
+  form {
+    padding: 1rem;
+    margin-top: 5vh;
+    width: 55%;
 
-.or-line span {
-  background: #fff;
-  padding: 0 5px;
+    header {
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2rem;
+        width: 45%;
+      }
+
+      h1 {
+        color: $text;
+      }
+    }
+
+    .form-inputs {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .signup-button {
+        background-color: $primary;
+        color: $text;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+        font-weight: 500;
+      }
+    }
+
+    h6 {
+      overflow-x: hidden;
+      margin: 0;
+      margin-top: 0.75rem;
+      // margin-bottom: 0.75rem;
+      display: flex;
+      flex-direction: row;
+      font-size: 0.75rem;
+      color: $text-secondary;
+      letter-spacing: 0.1rem;
+
+      &:before,
+      &:after {
+        overflow-x: hidden;
+        content: "";
+        flex: 1 1;
+        border-bottom: 0.05rem solid $text-secondary;
+        margin: auto;
+      }
+    }
+
+    .third-party-links {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      button {
+        width: 49%;
+        padding: 0.75rem;
+        font-weight: 600;
+        background-color: white;
+        border-radius: 1rem;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 0.75rem;
+        color: black;
+
+        img {
+          width: 1.75rem;
+          height: 1.75rem;
+          object-fit: cover;
+        }
+      }
+    }
+  }
 }

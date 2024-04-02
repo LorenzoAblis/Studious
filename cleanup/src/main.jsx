@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./pages/styles/global.scss";
+import "./global.scss";
 import App from "./App";
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
@@ -25,5 +25,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         }}
       />
     </React.StrictMode>
-  </AuthContextProvider>
+  </AuthContextProvider>,
 );
