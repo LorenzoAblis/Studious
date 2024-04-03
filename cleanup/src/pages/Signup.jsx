@@ -53,10 +53,15 @@ const Signup = () => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
+
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -68,20 +73,9 @@ const Signup = () => {
         </header>
         <section className="form-inputs">
           {inputs.map((input, index) => (
-            <FormInput
-              key={index}
-              {...input}
-              value={values[input.name]}
-              onChange={onChange}
-            />
+            <FormInput key={index} {...input} onChange={onChange} />
           ))}
-          <button
-            className="signup-button"
-            onClick={(e) => {
-              e.preventDefault();
-              console.log(values);
-            }}
-          >
+          <button className="signup-button" onClick={handleSubmit}>
             Signup
           </button>
           <p className="login-link">
