@@ -60,8 +60,30 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const email = values.email;
+    const password = values.password;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: email,
+      });
+
+      await set(ref(db, "users/" + email), {
+        email: email,
+      });
+    } catch (error) {
+      console.log(error.code, error.message);
+    }
   };
 
   return (
