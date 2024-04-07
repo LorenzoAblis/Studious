@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../../firebaseConfig";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, db, googleProvider } from "../../firebaseConfig";
 import { ref, set } from "firebase/database";
 
 import { google_logo, apple_logo, studious_logo } from "../assets";
@@ -84,7 +88,7 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
       const user = userCredential.user;
 
@@ -99,6 +103,12 @@ const Signup = () => {
     } catch (error) {
       console.log(error.code, error.message);
     }
+  };
+
+  const handleGoogleSignup = async () => {
+    signInWithPopup(auth, googleProvider).then((data) => {
+      
+    });
   };
 
   return (
@@ -122,7 +132,7 @@ const Signup = () => {
         <h6 className="or">&nbsp;or&nbsp;</h6>
         <section className="third-party-links">
           {authProviders.map((provider, index) => (
-            <button key={index}>
+            <button key={index} onClick={handleGoogleSignup}>
               <img src={provider.src} alt={provider.alt} />
               Continue with {provider.name}
             </button>
