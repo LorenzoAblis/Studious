@@ -53,7 +53,7 @@ const Signup = () => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-
+    // wdw
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
@@ -70,7 +70,7 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
       const user = userCredential.user;
 
