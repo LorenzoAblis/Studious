@@ -9,6 +9,7 @@ import "./styles/Signup.scss";
 
 const Signup = () => {
   const [values, setValues] = useState({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -16,24 +17,36 @@ const Signup = () => {
 
   const inputs = [
     {
-      name: "email",
-      errorMessage: "",
-      label: "Email",
+      name: "username",
+      errorMessage:
+        "Username should be 3-16 characters and shouldn't include any special characters.",
+      label: "Username",
       type: "text",
+      pattern: "^[A-Za-z0-9]{3,16}$",
+      required: true,
+    },
+    {
+      name: "email",
+      errorMessage: "Invaild email.",
+      label: "Email",
+      type: "email",
+      pattern: "^[^s@]+@[^s@]+.[^s@]+$",
       required: true,
     },
     {
       name: "password",
-      errorMessage: "",
+      errorMessage: "Password must be at least 6 characters.",
       label: "Password",
       type: "password",
+      pattern: "^.{6,}$",
       required: true,
     },
     {
       name: "confirmPassword",
-      errorMessage: "",
+      errorMessage: "Passwords do not match.",
       label: "Confirm Password",
       type: "password",
+      pattern: values.password,
       required: true,
     },
   ];
@@ -53,7 +66,7 @@ const Signup = () => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    // wdw
+
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
@@ -63,6 +76,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const username = values.username;
     const email = values.email;
     const password = values.password;
 
@@ -75,10 +89,11 @@ const Signup = () => {
       const user = userCredential.user;
 
       await updateProfile(user, {
-        displayName: email,
+        displayName: username,
       });
 
-      await set(ref(db, "users/" + email), {
+      await set(ref(db, "users/" + username), {
+        username: username,
         email: email,
       });
     } catch (error) {
