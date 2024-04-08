@@ -10,20 +10,18 @@ import { AuthContextProvider } from "./context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthContextProvider>
-    <React.StrictMode>
-      <App />
-      <Toaster
-        toastOptions={{
-          success: {
-            duration: 2000,
-            position: "top-right",
-          },
-          error: {
-            duration: 4000,
-            position: "top-right",
-          },
-        }}
-      />
-    </React.StrictMode>
-  </AuthContextProvider>,
+    <App />
+    <Toaster
+      toastOptions={{
+        success: {
+          duration: 2000,
+          position: "top-right",
+        },
+        error: {
+          duration: 4000,
+          position: "top-right",
+        },
+      }}
+    />
+  </AuthContextProvider>
 );

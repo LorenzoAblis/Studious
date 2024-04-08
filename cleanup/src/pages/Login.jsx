@@ -59,9 +59,8 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential) => {
-        // navigate("/");
-        console.log(userCredential.user);
+      .then(() => {
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
@@ -70,7 +69,7 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     signInWithPopup(auth, googleProvider).then((data) => {
-      //   console.log(currentUser.displayName);
+      navigate("/");
     });
   };
 
