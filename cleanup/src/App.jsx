@@ -3,6 +3,7 @@ import { AuthContext } from "./context/AuthContext.jsx";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Signup from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/">
             <Route path="users/signup" element={<Signup />} />
+            <Route path="users/login" element={<Login />} />
           </Route>
         </Routes>
       </BrowserRouter>

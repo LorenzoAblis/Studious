@@ -9,6 +9,7 @@ const FormInput = ({
   type,
   name,
   errorMessage,
+  pattern,
   ...inputProps
 }) => {
   const [focused, setFocused] = useState(false);
@@ -22,6 +23,9 @@ const FormInput = ({
       <label>{label}</label>
       <input
         {...inputProps}
+        name={name}
+        type={type}
+        pattern={pattern}
         onChange={onChange}
         onBlur={handleFocus}
         onFocus={() =>

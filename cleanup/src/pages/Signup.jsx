@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
@@ -12,6 +13,8 @@ import FormInput from "../common/components/FormInput";
 import "./styles/Signup.scss";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -34,7 +37,7 @@ const Signup = () => {
       errorMessage: "Invaild email.",
       label: "Email",
       type: "email",
-      pattern: "^[^s@]+@[^s@]+.[^s@]+$",
+      pattern: "^[w-.]+@([w-]+.)+[w-]{2,4}$",
       required: true,
     },
     {
@@ -88,17 +91,19 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
-        password,
+        password
       );
       const user = userCredential.user;
 
       await updateProfile(user, {
         displayName: username,
-      });
-
-      await set(ref(db, "users/" + username), {
-        username: username,
-        email: email,
+      }).then(async () => {
+        await set(ref(db, "users/" + username), {
+          username: username,
+          email: email,
+        }).then(() => {
+          navigate("/users/login");
+        });
       });
     } catch (error) {
       console.log(error.code, error.message);
@@ -106,8 +111,13 @@ const Signup = () => {
   };
 
   const handleGoogleSignup = async () => {
-    signInWithPopup(auth, googleProvider).then((data) => {
-      
+    signInWithPopup(auth, googleProvider).then(async (data) => {
+      await set(ref(db, "users/" + data.user.displayName), {
+        username: data.user.displayName,
+        email: data.user.email,
+      }).then(() => {
+        navigate("/users/login");
+      });
     });
   };
 
@@ -125,7 +135,7 @@ const Signup = () => {
           <button className="signup-button" onClick={handleSubmit}>
             Signup
           </button>
-          <p className="login-link">
+          <p className="login-link" onClick={() => navigate("/users/login")}>
             Already have an account? <span>Login</span>
           </p>
         </section>
