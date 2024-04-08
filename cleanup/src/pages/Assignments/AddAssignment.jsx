@@ -20,7 +20,7 @@ const AddAssignment = ({ showAddAssignment, setShowAddAssignment }) => {
       await set(
         ref(
           db,
-          `users/${currentUser.displayName}/assignments` + newAssignment.title
+          `users/${currentUser.displayName}/assignments/` + newAssignment.title
         ),
         {
           title: newAssignment.title || "",

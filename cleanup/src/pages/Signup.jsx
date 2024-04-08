@@ -6,7 +6,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth, db, googleProvider } from "../../firebaseConfig";
-import { ref, set } from "firebase/database";
+import { ref, set, get } from "firebase/database";
+import toast from "react-hot-toast";
 
 import { google_logo, apple_logo, studious_logo } from "../assets";
 import FormInput from "../common/components/FormInput";
@@ -88,37 +89,66 @@ const Signup = () => {
     const password = values.password;
 
     try {
+      const usernameRef = ref(db, "users/" + username);
+      const usernameSnapshot = await get(usernameRef);
+
+      if (usernameSnapshot.exists()) {
+        toast.error("Account already exists!");
+        return;
+      }
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
       const user = userCredential.user;
+      toast.success("Account successfully created!");
 
       await updateProfile(user, {
         displayName: username,
-      }).then(async () => {
-        await set(ref(db, "users/" + username), {
-          username: username,
-          email: email,
-        }).then(() => {
-          navigate("/users/login");
-        });
       });
+
+      await set(ref(db, "users/" + username), {
+        username: username,
+        email: email,
+      });
+
+      navigate("/users/login");
     } catch (error) {
-      console.log(error.code, error.message);
+      console.error(error.code, error.message);
     }
   };
 
   const handleGoogleSignup = async () => {
-    signInWithPopup(auth, googleProvider).then(async (data) => {
-      await set(ref(db, "users/" + data.user.displayName), {
-        username: data.user.displayName,
-        email: data.user.email,
-      }).then(() => {
-        navigate("/users/login");
+    signInWithPopup(auth, googleProvider)
+      .then(async (data) => {
+        const userRef = ref(db, "users/" + data.user.displayName);
+
+        get(userRef)
+          .then(async (snapshot) => {
+            if (snapshot.exists()) {
+              navigate("/");
+            } else {
+              await set(userRef, {
+                username: data.user.displayName,
+                email: data.user.email,
+              })
+                .then(() => {
+                  navigate("/users/login");
+                })
+                .catch((error) => {
+                  console.error("Error creating new user:", error);
+                });
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error signing in with Google:", error);
       });
-    });
   };
 
   return (

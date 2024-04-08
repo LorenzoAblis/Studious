@@ -19,6 +19,7 @@ const Home = () => {
       <Sidebar />
       <main className="home-container">
         <Assignments />
+        <h1>{currentUser.displayName}</h1>
       </main>
     </>
   );
