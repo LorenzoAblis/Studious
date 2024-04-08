@@ -11,7 +11,7 @@ A student planner and tracker for their work
 #### Authentication
 
 - [X]  Login/Signup with email
-- [ ]  Login/Signup with Google
+- [X]  Login/Signup with Google
 - [ ]  Login/Signup with Github
 
 #### Dashboard
@@ -27,6 +27,7 @@ A student planner and tracker for their work
 - [ ]  Add, Edit, Delete
 - [ ]  Complete feature 
 - [ ]  Search / Sorting
+- [ ]  Secure data read and write
 
 #### Completed
 
