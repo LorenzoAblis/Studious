@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import { studious_logo } from "../../assets";
 import "../styles/Sidebar.scss";
 
-const Sidebar = () => {
+const Sidebar = ({ currentUser }) => {
   return (
     <nav className="sidebar d-flex">
       <ul>
@@ -25,12 +26,17 @@ const Sidebar = () => {
         </li>
         <li>
           <a href="">
-            <i className="bi bi-gear-fill"></i>Settings
+            <i className="bi bi-gear-fill"></i>
+            {currentUser.displayName}
           </a>
         </li>
       </ul>
     </nav>
   );
+};
+
+Sidebar.propTypes = {
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default Sidebar;

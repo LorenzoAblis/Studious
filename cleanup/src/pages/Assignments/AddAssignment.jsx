@@ -24,7 +24,7 @@ const AddAssignment = ({ showAddAssignment, setShowAddAssignment }) => {
         ),
         {
           title: newAssignment.title || "",
-          class: newAssignment.class || "",
+          className: newAssignment.class || "",
           dueDate: newAssignment.dueDate || "",
         }
       );

@@ -1,32 +1,30 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 
 import AssignmentCard from "./AssignmentCard";
 import AddAssignment from "./AddAssignment";
 import "../styles/Assignments.scss";
 
-const Assignments = () => {
-  const assignmentsData = [
-    {
-      title: "Day 12 CW",
-      className: "HPrecalculus",
-      dueDate: "Wednesday, February 28",
-    },
-    {
-      title: "Day 13 CW",
-      className: "APrecalculus",
-      dueDate: "Thursday, March 1",
-    },
-    {
-      title: "Day 13 CW",
-      className: "APrecalculus",
-      dueDate: "Thursday, March 1",
-    },
-  ];
-  const [dropdownStates, setDropdownStates] = useState(
-    Array(assignmentsData.length).fill(false)
-  );
+const Assignments = ({ assignments }) => {
+  // Check if assignments is undefined, if so, initialize it as an empty object
+  if (!assignments) {
+    assignments = {};
+  }
 
+  const assignmentIds = Object.keys(assignments);
+  const [dropdownStates, setDropdownStates] = useState(
+    Array(assignmentIds.length).fill(false)
+  );
   const [showAddAssignment, setShowAddAssignment] = useState(false);
+
+  const handleOutsideClick = (event) => {
+    if (
+      !event.target.closest(".dropdown") &&
+      !event.target.closest(".dropdown-button")
+    ) {
+      setDropdownStates(Array(assignmentIds.length).fill(false));
+    }
+  };
 
   const toggleDropdown = (index) => {
     const newDropdownStates = Array(dropdownStates.length).fill(false);
@@ -35,19 +33,23 @@ const Assignments = () => {
   };
 
   return (
-    <section className="assignments">
+    <section className="assignments" onClick={handleOutsideClick}>
       <h1>Assignments</h1>
       <button onClick={() => setShowAddAssignment(true)}>Add</button>
-      <div className="assignment-cards">
-        {assignmentsData.map((assignment, index) => (
-          <AssignmentCard
-            key={index}
-            {...assignment}
-            toggleDropdown={() => toggleDropdown(index)}
-            showDropdown={dropdownStates[index]}
-          />
-        ))}
-      </div>
+      {assignmentIds.length === 0 ? (
+        <p>No assignments available</p>
+      ) : (
+        <div className="assignment-cards">
+          {assignmentIds.map((assignmentId, index) => (
+            <AssignmentCard
+              key={assignmentId}
+              {...assignments[assignmentId]}
+              toggleDropdown={() => toggleDropdown(index)}
+              showDropdown={dropdownStates[index]}
+            />
+          ))}
+        </div>
+      )}
 
       <AddAssignment
         showAddAssignment={showAddAssignment}
@@ -55,6 +57,10 @@ const Assignments = () => {
       />
     </section>
   );
+};
+
+Assignments.propTypes = {
+  assignments: PropTypes.object,
 };
 
 export default Assignments;

@@ -1,7 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ref, onValue } from "firebase/database";
 import { AuthContext } from "../context/AuthContext.jsx";
-import { auth } from "../../firebaseConfig";
-import { signOut } from "firebase/auth";
+import { db } from "../../firebaseConfig.js";
 
 import "./styles/Home.scss";
 import Sidebar from "../common/components/Sidebar.jsx";
@@ -9,17 +9,27 @@ import Assignments from "./Assignments/Assignments.jsx";
 
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState({});
+
+  const fetchUserData = () => {
+    const userRef = ref(db, `users/${currentUser.displayName}`);
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setUserData(data);
+      }
+    });
+  };
 
   useEffect(() => {
-    console.log("Home");
+    fetchUserData();
   }, []);
 
   return (
     <>
-      <Sidebar />
+      <Sidebar currentUser={currentUser} />
       <main className="home-container">
-        <Assignments />
-        <h1>{currentUser.displayName}</h1>
+        <Assignments assignments={userData.assignments} />
       </main>
     </>
   );

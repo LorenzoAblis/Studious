@@ -23,7 +23,7 @@ const AssignmentCard = ({
           <i className="bi bi-check-lg"></i>
         </button>
         <div>
-          <button onClick={handleClick}>
+          <button onClick={handleClick} className="dropdown-button">
             <i className="bi bi-three-dots"></i>
           </button>
           {showDropdown && (
