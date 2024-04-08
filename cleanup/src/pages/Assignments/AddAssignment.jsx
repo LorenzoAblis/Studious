@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import { db } from "/firebaseConfig";
 import { ref, set } from "firebase/database";
 
 import Modal from "../../common/components/Modal";
 
 const AddAssignment = ({ showAddAssignment, setShowAddAssignment }) => {
+  const { currentUser } = useContext(AuthContext);
   const [newAssignment, setNewAssignment] = useState({});
 
   const handleClose = () => {
@@ -15,11 +17,17 @@ const AddAssignment = ({ showAddAssignment, setShowAddAssignment }) => {
 
   const handleAdd = async () => {
     if (newAssignment.title) {
-      await set(ref(db, "shopping_items/" + newAssignment.title), {
-        title: newAssignment.title || "",
-        class: newAssignment.class || "",
-        dueDate: newAssignment.dueDate || "",
-      });
+      await set(
+        ref(
+          db,
+          `users/${currentUser.displayName}/assignments` + newAssignment.title
+        ),
+        {
+          title: newAssignment.title || "",
+          class: newAssignment.class || "",
+          dueDate: newAssignment.dueDate || "",
+        }
+      );
     }
 
     setNewAssignment({});
