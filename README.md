@@ -1,8 +1,56 @@
-# React + Vite
+# Studious
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A student planner and tracker for their work
 
-Currently, two official plugins are available:
+## Roadmap
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Authentication
+
+- [x] Login/Signup with email
+- [x] Login/Signup with Google
+- [ ] Login/Signup with Github
+
+#### Toasts
+
+- [ ] Handle errors and feedback
+
+#### Dashboard
+
+- [ ] # of Assignments
+- [ ] # of Tests
+- [ ] Current Class
+- [ ] Next Class
+
+#### Assignments
+
+- [ ] Fetch data from firebase
+- [ ] Add, Edit, Delete
+- [ ] Complete feature
+- [ ] Search / Sorting
+- [ ] Secure data read and write
+
+#### Completed
+
+- [ ] Redo / Delete
+- [ ] Search / Sorting
+
+#### Classes / Schedule
+
+- [ ] Add, Edit, Delete (Title, Location, Teacher, Time)
+- [ ] Schedule View
+- [ ] Reorder classes
+
+#### Settings
+
+- [ ] Theme
+- [ ] Account settings
+
+#### Tools
+
+- [ ] Pomodoro timers
+- [ ] GPA calculator
+- [ ] Grade calculator
+
+#### Tests
+
+- [ ] idk

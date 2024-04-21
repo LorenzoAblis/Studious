@@ -45,7 +45,6 @@ const Login = () => {
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         navigate("/");
-        console.log(userCredential.user);
       })
       .catch((error) => {
         if (error.code != "") {
