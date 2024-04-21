@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-$background: #081721;
-$primary: #44a9ed;
-$secondary: #0b2333;
-$accent: #3e7bd1;
+$background: #2a2c24;
+$background-secondary: hsl(72, 9%, 32%);
+$accent: #816c61;
+$secondary: #a89b9d;
+$primary: #cfcfea;
 $text: white;
 $text-secondary: rgba(white, 0.6);
 
@@ -12,5 +13,5 @@ $text-secondary: rgba(white, 0.6);
 }
 
 body {
-  background-color: $secondary;
+  background-color: $background;
 }
